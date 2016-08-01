@@ -22,7 +22,36 @@ ApplicationWindow {
     }
 
     Label {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+        id: label1
+        x: 31
+        y: 19
+        text: qsTr("URL:")
+    }
+
+    TextField {
+        id: txtUrl
+        x: 76
+        y: 16
+        width: 466
+        height: 22
+        placeholderText: qsTr("Text Field")
+    }
+
+    Button {
+        id: btGet
+        x: 548
+        y: 14
+        text: qsTr("GET")
+        onClicked: {
+            txtResult.text = ui.getResult(txtUrl)
+        }
+    }
+
+    TextArea {
+        id: txtResult
+        x: 31
+        y: 71
+        width: 577
+        height: 378
     }
 }
