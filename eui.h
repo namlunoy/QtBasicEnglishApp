@@ -2,7 +2,12 @@
 #define EUI_H
 
 #include <QObject>
+#include <QDebug>
+#include <QList>
+#include "etextwork.h"
 #include "enetwork.h"
+#include "eanswer.h"
+#include "equestion.h"
 
 class EUI : public QObject
 {
@@ -13,9 +18,6 @@ public:
 signals:
 
 public slots:
-
-private:
-    ENetwork *m_network;
 };
 
 #endif // EUI_H

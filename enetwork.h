@@ -2,6 +2,7 @@
 #define ENETWORK_H
 
 #include <QtCore>
+#include <QObject>
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>

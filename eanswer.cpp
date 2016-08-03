@@ -34,3 +34,4 @@ void EAnswer::setHint(const QString &hint)
 {
     m_hint = hint;
 }
+

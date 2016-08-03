@@ -2,7 +2,9 @@
 #define EQUESTION_H
 
 #include <QtCore>
+#include <QList>
 #include "eanswer.h"
+#include "etextwork.h"
 
 class EQuestion
 {
@@ -15,11 +17,20 @@ public:
     QString text() const;
     void setText(const QString &text);
 
+    QString htmlData() const;
+    void setHtmlData(const QString &htmlData);
+
+    QList<EAnswer> vecAnswers() const;
+    void setVecAnswers(const QList<EAnswer> &vecAnswers);
+
+protected:
+    void processHtmlData(const QString& input);
+
 private:
     QString m_text;
     QString m_explanation;
-    QVector<EAnswer> m_vecAnswers;
-
+    QList<EAnswer> m_vecAnswers;
+    QString m_htmlData;
 };
 
 #endif // EQUESTION_H

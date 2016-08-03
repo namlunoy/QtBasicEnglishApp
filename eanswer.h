@@ -7,6 +7,7 @@ class EAnswer
 {
 public:
     EAnswer();
+
     QString text() const;
     void setText(const QString &text);
 
@@ -23,3 +24,4 @@ private:
 };
 
 #endif // EANSWER_H
+

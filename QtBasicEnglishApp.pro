@@ -2,14 +2,16 @@ TEMPLATE = app
 
 QT += qml quick widgets
 QT += network
+QT += core
 
 CONFIG += c++11
 
 SOURCES += main.cpp \
-        equestion.cpp \
-        eanswer.cpp \
-        eui.cpp \
-        enetwork.cpp
+        enetwork.cpp \
+    eanswer.cpp \
+    equestion.cpp \
+    eui.cpp \
+    etextwork.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,7 +22,12 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-        equestion.h \
-        eanswer.h \
-        eui.h \
-        enetwork.h
+    enetwork.h \
+    eanswer.h \
+    equestion.h \
+    eui.h \
+    etextwork.h
+
+DISTFILES += \
+    node.html \
+    data.html
