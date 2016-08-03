@@ -14,7 +14,7 @@ class EUI : public QObject
     Q_OBJECT
 public:
     explicit EUI(QObject *parent = 0);
-    Q_INVOKABLE QString getResult(QString url);
+    Q_INVOKABLE QString getResult(QString url, QString );
 signals:
 
 public slots:

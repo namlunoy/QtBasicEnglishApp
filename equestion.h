@@ -9,7 +9,7 @@
 class EQuestion
 {
 public:
-    EQuestion();
+    EQuestion(int stt);
 
     QString explanation() const;
     void setExplanation(const QString &explanation);
@@ -23,10 +23,14 @@ public:
     QList<EAnswer> vecAnswers() const;
     void setVecAnswers(const QList<EAnswer> &vecAnswers);
 
+    int getId() const;
+    void setId(int value);
+
 protected:
     void processHtmlData(const QString& input);
 
 private:
+    int id;
     QString m_text;
     QString m_explanation;
     QList<EAnswer> m_vecAnswers;

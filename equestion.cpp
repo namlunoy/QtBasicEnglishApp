@@ -1,8 +1,8 @@
 #include "equestion.h"
 
-EQuestion::EQuestion()
+EQuestion::EQuestion(int stt)
 {
-
+    this->id = stt;
 }
 
 QString EQuestion::explanation() const
@@ -46,6 +46,16 @@ void EQuestion::processHtmlData(const QString &input)
 
     // #3: Get Answers
 
+}
+
+int EQuestion::getId() const
+{
+    return id;
+}
+
+void EQuestion::setId(int value)
+{
+    id = value;
 }
 
 QList<EAnswer> EQuestion::vecAnswers() const

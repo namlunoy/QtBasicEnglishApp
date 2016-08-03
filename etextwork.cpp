@@ -43,7 +43,6 @@ QString ETextWork::correctString(const QString& input2)
         if(end < 0)
             break;
         input.remove(start,end - start + 1);
-        qDebug() << input;
         start = input.indexOf('<');
     }
 
@@ -56,6 +55,7 @@ QString ETextWork::correctString(const QString& input2)
 
     // 3. Trim
     input = input.trimmed();
+
     return input;
 }
 
@@ -76,14 +76,17 @@ QList<EAnswer> ETextWork::getAnswers(const QString& input)
 
         EAnswer answer;
         answer.setText(s.split("</div>")[0]);
-        answer.setIsCorrect(s.contains("mtq_hint_text"));
+        answer.setIsCorrect(!s.contains("mtq_hint_text"));
+
         if(!answer.isCorrect())
-            answer.setHint((s.split("mtq_hint_text")[1]).split("</div>")[0]);
-
+        {
+            s = s.split("'mtq_hint_text'>")[1];
+            s = s.split("</div>")[0];
+            s = ETextWork::correctString(s);
+            answer.setHint(s);
+        }
         results.push_back(answer);
-
-        qDebug() << answer.text() <<"\n"<<answer.isCorrect()<<"\n"<<answer.hint()<<"\n";
-
+        //qDebug() << answer.text() <<"\n"<<answer.isCorrect()<<"\n"<<answer.hint()<<"\n";
     }
     return results;
 }

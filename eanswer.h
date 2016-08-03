@@ -17,7 +17,11 @@ public:
     QString hint() const;
     void setHint(const QString &hint);
 
+    int getId() const;
+    void setId(int value);
+
 private:
+    int id;
     QString m_text;
     bool m_isCorrect;
     QString m_hint;

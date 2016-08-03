@@ -35,3 +35,13 @@ void EAnswer::setHint(const QString &hint)
     m_hint = hint;
 }
 
+int EAnswer::getId() const
+{
+    return id;
+}
+
+void EAnswer::setId(int value)
+{
+    id = value;
+}
+

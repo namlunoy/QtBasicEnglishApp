@@ -43,7 +43,7 @@ ApplicationWindow {
         y: 14
         text: qsTr("GET")
         onClicked: {
-            txtResult.text = ui.getResult(txtUrl)
+            txtResult.text = ui.getResult(txtUrl.text, txtStt.text)
         }
     }
 
@@ -53,5 +53,20 @@ ApplicationWindow {
         y: 71
         width: 577
         height: 378
+    }
+
+    TextField {
+        text: "1"
+        id: txtStt
+        x: 76
+        y: 44
+        placeholderText: qsTr("Text Field")
+    }
+
+    Label {
+        id: label2
+        x: 31
+        y: 47
+        text: qsTr("STT")
     }
 }
