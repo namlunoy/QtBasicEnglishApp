@@ -13,6 +13,7 @@ QString EAnswer::text() const
 void EAnswer::setText(const QString &text)
 {
     m_text = text;
+    ETextWork::verifyForSql(m_text);
 }
 
 bool EAnswer::isCorrect() const
@@ -33,6 +34,7 @@ QString EAnswer::hint() const
 void EAnswer::setHint(const QString &hint)
 {
     m_hint = hint;
+    ETextWork::verifyForSql(m_hint);
 }
 
 

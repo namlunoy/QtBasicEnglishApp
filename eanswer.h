@@ -2,6 +2,7 @@
 #define EANSWER_H
 
 #include <QtCore>
+#include "etextwork.h"
 
 class EAnswer
 {

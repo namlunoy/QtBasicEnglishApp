@@ -63,6 +63,7 @@ QString ETextWork::getQuestion(const QString& input)
 {
     QString question = input.split("'mtq_question_text'>")[1].split("</div>")[0];
     question = ETextWork::correctString(question);
+    verifyForSql(question);
     return question;
 }
 
@@ -95,5 +96,22 @@ QString ETextWork::getExplanation(const QString &input)
 {
     QString key = "'mtq_explanation-text'>";
     QString result = (input.split(key)[1]).split("</div>")[0];
+    verifyForSql(result);
     return result.trimmed();
+}
+
+void ETextWork::verifyForSql(QString &input)
+{
+    // 4. Get rid of this special character '
+    while(input.contains("\'"))
+    {
+        int index = input.indexOf("'");
+        input.replace(index,1,"\"");
+    }
+
+//    while(input.contains("\r\n\r\n"))
+//    {
+//        int index = input.indexOf("\r\n\r\n");
+//        input.replace(index,4,"");
+//    }
 }

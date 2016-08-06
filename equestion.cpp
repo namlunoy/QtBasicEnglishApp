@@ -19,6 +19,7 @@ QString EQuestion::explanation() const
 void EQuestion::setExplanation(const QString &explanation)
 {
     m_explanation = explanation;
+    ETextWork::verifyForSql(m_explanation);
 }
 
 QString EQuestion::text() const
@@ -29,6 +30,7 @@ QString EQuestion::text() const
 void EQuestion::setText(const QString &text)
 {
     m_text = text;
+    ETextWork::verifyForSql(m_text);
 }
 
 QString EQuestion::htmlData() const
