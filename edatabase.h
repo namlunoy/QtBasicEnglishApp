@@ -26,6 +26,7 @@ public:
 
     void insert(EQuestion question);
     void insert(EAnswer answer);
+
     int insert(QList<EQuestion> questons);
     int insert(QList<EAnswer> answers);
 

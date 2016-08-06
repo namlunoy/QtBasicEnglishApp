@@ -7,25 +7,27 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
+#include "elesson.h"
+
 class ENetwork : public QObject
 {
     Q_OBJECT
 public:
     // Should use this -> and add the parent to it to auto release.
-    explicit ENetwork(QObject *parent = 0);
+    explicit ENetwork(QObject *parent = 0, ELesson *lesson = 0);
     ~ENetwork();
 
-    /**
-     * @brief getData dfsdfsd
-     * @param url sdfsdfsdf
-     */
     void getData(QString url);
 
-signals:
+    ELesson *getPLesson() const;
+    void setPLesson(ELesson *value);
+
+public slots:
     void onGetDataDone(QNetworkReply *reply);
 
 private:
-    QNetworkAccessManager *m_networkManager;
+    QNetworkAccessManager *_network;
+    ELesson *pLesson;
 };
 
 #endif // ENETWORK_H

@@ -34,3 +34,18 @@ void ELesson::setUrl(const QString &value)
 {
     url = value;
 }
+
+QString ELesson::toString()
+{
+    return QString::number(id) + "|" + text + "\n"+url;
+}
+
+QList<EQuestion> ELesson::getQuestions() const
+{
+    return questions;
+}
+
+void ELesson::setQuestions(const QList<EQuestion> &value)
+{
+    questions = value;
+}

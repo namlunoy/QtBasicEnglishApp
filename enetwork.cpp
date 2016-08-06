@@ -1,14 +1,36 @@
 #include "enetwork.h"
 
-ENetwork::ENetwork(QObject *parent) : QObject(parent)
+ENetwork::ENetwork(QObject *parent, ELesson *lesson) : QObject(parent)
 {
     qDebug() << "ENetwork()";
-    m_networkManager = new QNetworkAccessManager(this);
-    QObject::connect(m_networkManager, &QNetworkAccessManager::finished,
+    _network = new QNetworkAccessManager(this);
+    QObject::connect(_network, &QNetworkAccessManager::finished,
                      this, &ENetwork::onGetDataDone);
+    pLesson = lesson;
 }
 
 ENetwork::~ENetwork()
 {
     qDebug() << "~ENetwork()";
+}
+
+void ENetwork::getData(QString url)
+{
+    _network->get(QNetworkRequest(QUrl(url)));
+}
+
+void ENetwork::onGetDataDone(QNetworkReply *reply)
+{
+    QString htmlContent(reply->readAll());
+
+}
+
+ELesson *ENetwork::getPLesson() const
+{
+    return pLesson;
+}
+
+void ENetwork::setPLesson(ELesson *value)
+{
+    pLesson = value;
 }
