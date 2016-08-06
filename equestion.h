@@ -10,7 +10,7 @@ class EQuestion
 {
 public:
     EQuestion();
-    EQuestion(int lessonId);
+    EQuestion(int lessonId, int index);
 
     QString explanation() const;
     void setExplanation(const QString &explanation);

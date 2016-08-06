@@ -5,9 +5,10 @@ EQuestion::EQuestion()
 
 }
 
-EQuestion::EQuestion(int lessonId)
+EQuestion::EQuestion(int lessonId, int index)
 {
     this->lessonId = lessonId;
+    setId(QString::number(lessonId) +"-"+QString::number(index));
 }
 
 QString EQuestion::explanation() const
@@ -45,12 +46,14 @@ void EQuestion::processHtmlData(const QString &input)
 {
     // #1: Get question
     m_text = ETextWork::getQuestion(input);
-
     // #2: Get explanation
     m_explanation = ETextWork::getExplanation(input);
-
-    // #3: Get Answers
-
+    // #3: Get answer
+    m_Answers = ETextWork::getAnswers(input);
+    for (int i = 0; i < m_Answers.count(); ++i) {
+        m_Answers[i].setId(id+"-"+QString::number(i+1));
+        m_Answers[i].setQuestionId(this->id);
+    }
 }
 
 QString EQuestion::getId() const
@@ -75,7 +78,7 @@ void EQuestion::setLessonId(int value)
 
 QString EQuestion::toString()
 {
-    return QString::number(lessonId) +":"+id +" - " + text();
+    return "[" +id+"]: "+text();
 }
 
 

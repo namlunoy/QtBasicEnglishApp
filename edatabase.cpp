@@ -21,12 +21,12 @@ EDatabase::~EDatabase()
 }
 
 
-void EDatabase::insert(EQuestion question)
+void EDatabase::insert(const EQuestion& question)
 {
     if(_db.open())
     {
         QSqlQuery query;
-        QString sql = "insert into Question (id, text, explan) values (" +question.getId()+ ",'"+question.text()+"','"+question.explanation()+"')";
+        QString sql = "insert into Question (id, text, explan, lesson_id) values ('" +question.getId()+ "'','"+question.text()+"','"+question.explanation()+"',"+QString::number(question.getLessonId())+")";
         qDebug() << sql;
         query.prepare(sql);
         if(query.exec()){
@@ -41,13 +41,13 @@ void EDatabase::insert(EQuestion question)
     }
 }
 
-void EDatabase::insert(EAnswer answer)
+void EDatabase::insert(const EAnswer& answer)
 {
     if(_db.open())
     {
-        QString sql = "insert into Answer (id, question_id, text, is_correct, hint) values ("
-                +answer.getId()+ ", " + answer.getQuestionId()
-                + "  ,' " +answer.text()+ "',"+ QString::number(answer.isCorrect() ? 1 : 0)+",' "+ answer.hint() +" ')";
+        QString sql = "insert into Answer (id, question_id, text, is_correct, hint) values ('"
+                +answer.getId()+ "'', '" + answer.getQuestionId()
+                + "' ,' " +answer.text()+ "',"+ QString::number(answer.isCorrect() ? 1 : 0)+",' "+ answer.hint() +" ')";
         qDebug() << sql;
         QSqlQuery query;
         query.prepare(sql);
@@ -61,7 +61,7 @@ void EDatabase::insert(EAnswer answer)
     }
 }
 
-int EDatabase::insert(QList<EQuestion> questons)
+int EDatabase::insert(const QList<EQuestion>& questons)
 {
     if(_db.open())
     {
@@ -71,12 +71,14 @@ int EDatabase::insert(QList<EQuestion> questons)
 
         for(EQuestion q : questons)
         {
-            sql = "insert into Question (id, text, explan) values (" +q.getId()+ ",'"+q.text()+"','"+q.explanation()+"')";
+            sql = "insert into Question (id, text, explan, lesson_id) values ('" +q.getId()+ "','"+q.text()+"','"+q.explanation()+"' , "+QString::number(q.getLessonId()) +")";
+           // qDebug() << sql;
             query.prepare(sql);
             if(query.exec())
             {
-                counter += query.numRowsAffected();
+                qDebug() << "Question "<< q.getId() << " is inserted!";
             }else{
+                qDebug() <<"SQL: "<< sql;
                 qDebug() << "FAILED: " << query.lastError().text();
             }
         }
@@ -87,7 +89,7 @@ int EDatabase::insert(QList<EQuestion> questons)
     return 0;
 }
 
-int EDatabase::insert(QList<EAnswer> answers)
+int EDatabase::insert(const QList<EAnswer>& answers)
 {
     if(_db.open())
     {
@@ -96,15 +98,16 @@ int EDatabase::insert(QList<EAnswer> answers)
         QString sql;
         for(EAnswer a : answers)
         {
-            sql = "insert into Answer (id, question_id, text, is_correct, hint) values ("
-                    +a.getId()+ ", " + a.getQuestionId()
-                    + "  ,' " +a.text()+ "',"+ QString::number(a.isCorrect() ? 1 : 0)+",' "+ a.hint() +" ')";
+            sql = "insert into Answer (id, question_id, text, is_correct, hint) values ('"
+                    +a.getId()+ "', '" + a.getQuestionId()
+                    + "',' " +a.text()+ "',"+ QString::number(a.isCorrect() ? 1 : 0)+",' "+ a.hint() +" ')";
             query.prepare(sql);
             if(query.exec())
             {
-                qDebug() << "ok";
+                qDebug() << "Answers "<<a.getId()<<" is inserted!";
                 counter += query.numRowsAffected();
             }else{
+                qDebug() << "sql: "<<sql;
                 qDebug() << "FAILED: " << query.lastError().text();
             }
         }
@@ -114,6 +117,14 @@ int EDatabase::insert(QList<EAnswer> answers)
         qDebug() << "Cannot open database!";
     }
     return 0;
+}
+
+int EDatabase::insert(const ELesson &lesson)
+{
+    insert(lesson.getQuestions());
+    for (int i = 0; i < lesson.getQuestions().count(); ++i) {
+        insert(lesson.getQuestions()[i].answers());
+    }
 }
 
 QList<ELesson> EDatabase::getLessons()
@@ -154,7 +165,7 @@ QList<EQuestion> EDatabase::getQuestions(int idLesson)
         {
            while(query.next())
            {
-               EQuestion q(idLesson);
+               EQuestion q;
                q.setId(query.value("id").toString());
                q.setText(query.value("text").toString());
                q.setExplanation(query.value("explan").toString());

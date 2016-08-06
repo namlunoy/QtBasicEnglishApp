@@ -24,9 +24,11 @@ int main(int argc, char *argv[])
     EDatabase db;
     QList<ELesson> lessons = db.getLessons();
 
+    qDebug() << "a";
     ENetwork network(&app, &lessons[0]);
     network.getData(lessons[0].getUrl());
 
+    qDebug() << "b";
 
 
 

@@ -17,9 +17,11 @@ QString EUI::getResult(QString url, QString stt)
 
     // #2: Separate questions add get info
     QStringList htmlQuests = ETextWork::splitQuestion(data);
+    int index = 0;
     for(QString s : htmlQuests)
     {
-        EQuestion q(no);
+        index++;
+        EQuestion q(no,index);
 
         q.setHtmlData(s);
         q.setAnswers(ETextWork::getAnswers(s));

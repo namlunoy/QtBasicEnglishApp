@@ -10,7 +10,7 @@ QDir EUtils::getCurrentProjectDir()
     QDir dir;
     while(!dir.absolutePath().endsWith("Qt")){
         dir.cdUp();
-        qDebug() << dir.absolutePath();
+        //qDebug() << dir.absolutePath();
     }
     dir.cd("QtBasicEnglishApp");
     return dir;

@@ -8,6 +8,7 @@
 #include <QNetworkReply>
 
 #include "elesson.h"
+#include "edatabase.h"
 
 class ENetwork : public QObject
 {

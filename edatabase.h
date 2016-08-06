@@ -24,11 +24,12 @@ public:
     EDatabase();
     ~EDatabase();
 
-    void insert(EQuestion question);
-    void insert(EAnswer answer);
+    void insert(const EQuestion& question);
+    void insert(const EAnswer& answer);
 
-    int insert(QList<EQuestion> questons);
-    int insert(QList<EAnswer> answers);
+    int insert(const QList<EQuestion>& questons);
+    int insert(const QList<EAnswer>& answers);
+    int insert(const ELesson& lesson);
 
     QList<ELesson> getLessons();
     QList<EQuestion> getQuestions(int idLesson);
