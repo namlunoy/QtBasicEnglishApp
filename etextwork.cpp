@@ -61,7 +61,11 @@ QString ETextWork::correctString(const QString& input2)
 
 QString ETextWork::getQuestion(const QString& input)
 {
-    QString question = input.split("'mtq_question_text'>")[1].split("</div>")[0];
+    QString key = "'mtq_question_text'>";
+    if(input.contains(key) == false)
+        return "";
+
+    QString question = input.split(key)[1].split("</div>")[0];
     question = ETextWork::correctString(question);
     verifyForSql(question);
     return question;
@@ -79,7 +83,7 @@ QList<EAnswer> ETextWork::getAnswers(const QString& input)
         answer.setText(s.split("</div>")[0]);
         answer.setIsCorrect(!s.contains("mtq_hint_text"));
 
-        if(!answer.isCorrect())
+        if(!answer.isCorrect() && s.contains("'mtq_hint_text'>"))
         {
             s = s.split("'mtq_hint_text'>")[1];
             s = s.split("</div>")[0];
@@ -95,6 +99,9 @@ QList<EAnswer> ETextWork::getAnswers(const QString& input)
 QString ETextWork::getExplanation(const QString &input)
 {
     QString key = "'mtq_explanation-text'>";
+    if(input.contains(key) == false)
+        return "";
+
     QString result = (input.split(key)[1]).split("</div>")[0];
     verifyForSql(result);
     return result.trimmed();
@@ -103,7 +110,7 @@ QString ETextWork::getExplanation(const QString &input)
 void ETextWork::verifyForSql(QString &input)
 {
     // 4. Get rid of this special character '
-    while(input.contains("\'"))
+    while(input.contains("'"))
     {
         int index = input.indexOf("'");
         input.replace(index,1,"\"");

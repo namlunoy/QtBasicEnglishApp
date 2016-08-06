@@ -24,12 +24,15 @@ int main(int argc, char *argv[])
     EDatabase db;
     QList<ELesson> lessons = db.getLessons();
 
-    qDebug() << "a";
-    ENetwork network(&app, &lessons[0]);
-    network.getData(lessons[0].getUrl());
 
-    qDebug() << "b";
+    for (int i = 0; i < lessons.count(); ++i) {
+        qDebug() << "Times: "<<i;
+        ENetwork *network = new ENetwork(&app, &lessons[i]);
+        network->getData(lessons[i].getUrl());
+    }
 
+//    ENetwork *network = new ENetwork(&app, &lessons[8]);
+//    network->getData(lessons[8].getUrl());
 
 
     return app.exec();
