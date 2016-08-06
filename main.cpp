@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     EDatabase db;
     QList<EQuestion> questions = db.getQuestions(1);
+    qDebug() << "has " << questions.count() << " question(s)";
     for(auto q : questions)
     {
         qDebug() << q.toString() << q.answers().count();

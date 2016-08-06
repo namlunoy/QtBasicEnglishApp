@@ -31,7 +31,7 @@ public:
 
     QList<ELesson> getLessons();
     QList<EQuestion> getQuestions(int idLesson);
-    QList<EAnswer> getAnswers(int idQuestion);
+    QList<EAnswer> getAnswers(QString idQuestion);
 
     void showQuestions();
     void showAnswers();

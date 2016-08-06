@@ -35,28 +35,32 @@ void EAnswer::setHint(const QString &hint)
     m_hint = hint;
 }
 
-int EAnswer::getId() const
+
+
+QString EAnswer::toString()
+{
+    return id+"|"+ text();
+}
+
+QString EAnswer::getQuestionId() const
+{
+    return questionId;
+}
+
+void EAnswer::setQuestionId(const QString &value)
+{
+    questionId = value;
+}
+
+QString EAnswer::getId() const
 {
     return id;
 }
 
-void EAnswer::setId(int value)
+void EAnswer::setId(const QString &value)
 {
     id = value;
 }
 
-int EAnswer::getId_quest() const
-{
-    return id_quest;
-}
 
-void EAnswer::setId_quest(int value)
-{
-    id_quest = value;
-}
-
-QString EAnswer::toString()
-{
-    return QString::number(id) +"|"+ text();
-}
 

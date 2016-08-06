@@ -53,6 +53,16 @@ void EQuestion::processHtmlData(const QString &input)
 
 }
 
+QString EQuestion::getId() const
+{
+    return id;
+}
+
+void EQuestion::setId(const QString &value)
+{
+    id = value;
+}
+
 int EQuestion::getLessonId() const
 {
     return lessonId;
@@ -65,18 +75,9 @@ void EQuestion::setLessonId(int value)
 
 QString EQuestion::toString()
 {
-    return QString::number(lessonId) +":"+QString::number(id) +" - " + text();
+    return QString::number(lessonId) +":"+id +" - " + text();
 }
 
-int EQuestion::getId() const
-{
-    return id;
-}
-
-void EQuestion::setId(int value)
-{
-    id = value;
-}
 
 QList<EAnswer> EQuestion::answers() const
 {

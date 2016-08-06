@@ -17,16 +17,16 @@ public:
     QString hint() const;
     void setHint(const QString &hint);
 
-    int getId() const;
-    void setId(int value);
+    QString getId() const;
+    void setId(const QString &value);
 
-    int getId_quest() const;
-    void setId_quest(int value);
+    QString getQuestionId() const;
+    void setQuestionId(const QString &value);
 
     QString toString();
 private:
-    int id;
-    int id_quest;
+    QString id;
+    QString questionId;
     QString m_text;
     bool m_isCorrect;
     QString m_hint;

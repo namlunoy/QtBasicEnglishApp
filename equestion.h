@@ -24,18 +24,19 @@ public:
     QList<EAnswer> answers() const;
     void setAnswers(const QList<EAnswer> &answers);
 
-    int getId() const;
-    void setId(int value);
+    QString getId() const;
+    void setId(const QString &value);
 
     int getLessonId() const;
     void setLessonId(int value);
 
     QString toString();
+
 protected:
     void processHtmlData(const QString& input);
 
 private:
-    int id;
+    QString id;
     int lessonId;
     QString m_text;
     QString m_explanation;
