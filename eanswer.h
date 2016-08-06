@@ -20,11 +20,16 @@ public:
     int getId() const;
     void setId(int value);
 
+    int getId_quest() const;
+    void setId_quest(int value);
+
 private:
     int id;
+    int id_quest;
     QString m_text;
     bool m_isCorrect;
     QString m_hint;
+
 };
 
 #endif // EANSWER_H

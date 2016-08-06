@@ -45,3 +45,13 @@ void EAnswer::setId(int value)
     id = value;
 }
 
+int EAnswer::getId_quest() const
+{
+    return id_quest;
+}
+
+void EAnswer::setId_quest(int value)
+{
+    id_quest = value;
+}
+

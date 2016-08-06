@@ -3,6 +3,7 @@ TEMPLATE = app
 QT += qml quick widgets
 QT += network
 QT += core
+QT +=sql
 
 CONFIG += c++11
 
@@ -11,7 +12,9 @@ SOURCES += main.cpp \
     eanswer.cpp \
     equestion.cpp \
     eui.cpp \
-    etextwork.cpp
+    etextwork.cpp \
+        edatabase.cpp \
+    eutils.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,7 +29,9 @@ HEADERS += \
     eanswer.h \
     equestion.h \
     eui.h \
-    etextwork.h
+    etextwork.h \
+    edatabase.h \
+    eutils.h
 
 DISTFILES += \
     node.html \
