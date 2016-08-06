@@ -116,6 +116,91 @@ int EDatabase::insert(QList<EAnswer> answers)
     return 0;
 }
 
+QList<ELesson> EDatabase::getLessons()
+{
+    QList<ELesson> results;
+    if(_db.open())
+    {
+        QString sql = "select * from Lesson";
+        QSqlQuery query;
+        query.prepare(sql);
+        if(query.exec())
+        {
+            while(query.next())
+            {
+                ELesson l;
+                l.setId(query.value("id").toInt());
+                l.setText(query.value("text").toString());
+                l.setUrl(query.value("url").toString());
+                results.push_back(l);
+            }
+        }else{
+            qDebug() << "Get lessons failed: " << query.lastError().text();
+        }
+        _db.close();
+    }
+    return results;
+}
+
+QList<EQuestion> EDatabase::getQuestions(int idLesson)
+{
+    QList<EQuestion> results;
+    if(_db.open())
+    {
+        QString sql = "select * from Question where lesson_id = "+QString::number(idLesson);
+        QSqlQuery query;
+        query.prepare(sql);
+        if(query.exec())
+        {
+           while(query.next())
+           {
+               EQuestion q(idLesson);
+               q.setId(query.value("id").toInt());
+               q.setText(query.value("text").toString());
+               q.setExplanation(query.value("explan").toString());
+               results.push_back(q);
+           }
+        }else{
+            qDebug() << "Get questions failed: "<< query.lastError().text();
+        }
+        _db.close();
+    }
+
+    // Get the answers of the questions
+    for(EQuestion q : results)
+        q.setAnswers(getAnswers(q.getId()));
+
+    return results;
+}
+
+QList<EAnswer> EDatabase::getAnswers(int idQuestion)
+{
+    QList<EAnswer> results;
+    if(_db.open())
+    {
+        QString sql = "select * from Answer where question_id = "+QString::number(idQuestion);
+        QSqlQuery query;
+        query.prepare(sql);
+        if(query.exec())
+        {
+            while(query.next())
+            {
+                EAnswer a;
+                a.setId(query.value("id").toInt());
+                a.setId_quest(query.value("question_id").toInt());
+                a.setText(query.value("text").toString());
+                a.setIsCorrect(query.value("is_correct").toBool());
+                a.setHint(query.value("hint").toString());
+                results.push_back(a);
+            }
+        }else{
+            qDebug() << "Get Answers failed: " << query.lastError().text();
+        }
+        _db.close();
+    }
+    return results;
+}
+
 void EDatabase::showQuestions()
 {
     if(_db.open())
@@ -142,5 +227,28 @@ void EDatabase::showAnswers()
         }
         _db.close();
     }
+}
+
+void EDatabase::showLessons()
+{
+    if(_db.open())
+    {
+        QSqlQuery query("select * from Lesson");
+        if(query.exec())
+        {
+            while(query.next())
+                qDebug() << query.value(0).toString()
+                         <<" - "<<query.value(1).toString()
+                        <<" - "<<query.value(2).toString();;
+        }
+        _db.close();
+    }
+}
+
+void EDatabase::test()
+{
+    _db.open();
+    qDebug() << "Test open 2 times: "<< _db.open();
+    _db.close();
 }
 

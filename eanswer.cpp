@@ -55,3 +55,8 @@ void EAnswer::setId_quest(int value)
     id_quest = value;
 }
 
+QString EAnswer::toString()
+{
+    return QString::number(id) +"|"+ text();
+}
+

@@ -1,8 +1,13 @@
 #include "equestion.h"
 
-EQuestion::EQuestion(int stt)
+EQuestion::EQuestion()
 {
-    this->id = stt;
+
+}
+
+EQuestion::EQuestion(int lessonId)
+{
+    this->lessonId = lessonId;
 }
 
 QString EQuestion::explanation() const
@@ -48,6 +53,21 @@ void EQuestion::processHtmlData(const QString &input)
 
 }
 
+int EQuestion::getLessonId() const
+{
+    return lessonId;
+}
+
+void EQuestion::setLessonId(int value)
+{
+    lessonId = value;
+}
+
+QString EQuestion::toString()
+{
+    return QString::number(lessonId) +":"+QString::number(id) +" - " + text();
+}
+
 int EQuestion::getId() const
 {
     return id;
@@ -58,13 +78,13 @@ void EQuestion::setId(int value)
     id = value;
 }
 
-QList<EAnswer> EQuestion::vecAnswers() const
+QList<EAnswer> EQuestion::answers() const
 {
-    return m_vecAnswers;
+    return m_Answers;
 }
 
-void EQuestion::setVecAnswers(const QList<EAnswer> &vecAnswers)
+void EQuestion::setAnswers(const QList<EAnswer> &vecAnswers)
 {
-    m_vecAnswers = vecAnswers;
+    m_Answers = vecAnswers;
 }
 

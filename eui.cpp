@@ -22,14 +22,14 @@ QString EUI::getResult(QString url, QString stt)
         EQuestion q(no);
 
         q.setHtmlData(s);
-        q.setVecAnswers(ETextWork::getAnswers(s));
+        q.setAnswers(ETextWork::getAnswers(s));
         listQuestions.push_back(q);
     }
 
     for(EQuestion q : listQuestions)
     {
         qDebug() << "Q: "<< q.text();
-        for(EAnswer a : q.vecAnswers())
+        for(EAnswer a : q.answers())
         {
             qDebug() << a.text() <<"\t|"<<a.isCorrect() << "\t|"<<a.hint();
         }

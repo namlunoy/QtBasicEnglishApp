@@ -9,7 +9,8 @@
 class EQuestion
 {
 public:
-    EQuestion(int stt);
+    EQuestion();
+    EQuestion(int lessonId);
 
     QString explanation() const;
     void setExplanation(const QString &explanation);
@@ -20,20 +21,25 @@ public:
     QString htmlData() const;
     void setHtmlData(const QString &htmlData);
 
-    QList<EAnswer> vecAnswers() const;
-    void setVecAnswers(const QList<EAnswer> &vecAnswers);
+    QList<EAnswer> answers() const;
+    void setAnswers(const QList<EAnswer> &answers);
 
     int getId() const;
     void setId(int value);
 
+    int getLessonId() const;
+    void setLessonId(int value);
+
+    QString toString();
 protected:
     void processHtmlData(const QString& input);
 
 private:
     int id;
+    int lessonId;
     QString m_text;
     QString m_explanation;
-    QList<EAnswer> m_vecAnswers;
+    QList<EAnswer> m_Answers;
     QString m_htmlData;
 };
 

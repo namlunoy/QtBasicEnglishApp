@@ -9,12 +9,13 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
         enetwork.cpp \
-    eanswer.cpp \
-    equestion.cpp \
-    eui.cpp \
-    etextwork.cpp \
+        eanswer.cpp \
+        equestion.cpp \
+        eui.cpp \
+        etextwork.cpp \
         edatabase.cpp \
-    eutils.cpp
+    eutils.cpp \
+    elesson.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,7 +32,8 @@ HEADERS += \
     eui.h \
     etextwork.h \
     edatabase.h \
-    eutils.h
+    eutils.h \
+    elesson.h
 
 DISTFILES += \
     node.html \

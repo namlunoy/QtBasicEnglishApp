@@ -10,6 +10,7 @@
 #include <QList>
 
 #include "eutils.h"
+#include "elesson.h"
 #include "equestion.h"
 #include "eanswer.h"
 
@@ -28,9 +29,15 @@ public:
     int insert(QList<EQuestion> questons);
     int insert(QList<EAnswer> answers);
 
+    QList<ELesson> getLessons();
+    QList<EQuestion> getQuestions(int idLesson);
+    QList<EAnswer> getAnswers(int idQuestion);
 
     void showQuestions();
     void showAnswers();
+    void showLessons();
+
+    void test();
 };
 
 #endif // EDATABASE_H

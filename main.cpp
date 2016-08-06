@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QScopedPointer>
+#include <QList>
+#include <QDebug>
 #include "eui.h"
 #include "edatabase.h"
 #include "equestion.h"
@@ -12,19 +14,17 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     EDatabase db;
-    QList<EAnswer> as;
-    EAnswer a1;
-    a1.setId(111);
-    a1.setText("111");
-    as.push_back(a1);
+    QList<EQuestion> questions = db.getQuestions(1);
+    for(auto q : questions)
+    {
+        qDebug() << q.toString() << q.answers().count();
+        QList<EAnswer> r = q.answers();
 
-    EAnswer a2;
-    a2.setId(222);
-    a2.setText("222");
-    as.push_back(a2);
+        for(auto a : r)
+            qDebug() << a.toString();
+        qDebug() << endl;
+    }
 
-    db.insert(as);
-    db.showAnswers();
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

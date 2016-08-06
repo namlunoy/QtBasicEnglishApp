@@ -23,6 +23,7 @@ public:
     int getId_quest() const;
     void setId_quest(int value);
 
+    QString toString();
 private:
     int id;
     int id_quest;
