@@ -127,6 +127,27 @@ int EDatabase::insert(const ELesson &lesson)
     }
 }
 
+void EDatabase::updateContentLesson(int idLesson, const QString &content)
+{
+    if(_db.open())
+    {
+        QSqlQuery query;
+        QByteArray byteArr;
+        byteArr.append(content);
+        QString n(byteArr);
+        QString sql = "update Lesson set content='"+n+"' where id = "+idLesson;
+        query.prepare(sql);
+        if(query.exec())
+        {
+            qDebug() << "Update lesson " << idLesson <<" ok!";
+        }else{
+            qDebug() << "Failed ["<<idLesson<<"]: "<<query.lastError().text();
+            qDebug() << sql;
+        }
+        _db.close();
+    }
+}
+
 QList<ELesson> EDatabase::getLessons()
 {
     QList<ELesson> results;

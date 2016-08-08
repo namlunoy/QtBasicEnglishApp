@@ -25,7 +25,9 @@ public:
 
 public slots:
     void onGetDataDone(QNetworkReply *reply);
-
+protected:
+    void getAllObjects(const QString&  htmlContent);
+    void getContentLesson(const QString&  htmlContent);
 private:
     QNetworkAccessManager *_network;
     ELesson *pLesson;

@@ -107,6 +107,24 @@ QString ETextWork::getExplanation(const QString &input)
     return result.trimmed();
 }
 
+QString ETextWork::getLessonContent(const QString &input)
+{
+    QString result;
+    QString keyStart = "<span class = ";
+    QString keyEnd = "<div id=\"mtq_quiz_area";
+    int start = input.indexOf(keyStart);
+    int end = input.indexOf(keyEnd);
+
+    if(start >= 0 && end > start)
+    {
+        result = input.split(keyStart)[1];
+        result = result.split(keyEnd)[0];
+        verifyForSql(result);
+    }
+
+    return result;
+}
+
 void ETextWork::verifyForSql(QString &input)
 {
     // 4. Get rid of this special character '

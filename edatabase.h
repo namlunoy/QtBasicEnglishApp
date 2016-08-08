@@ -31,6 +31,8 @@ public:
     int insert(const QList<EAnswer>& answers);
     int insert(const ELesson& lesson);
 
+    void updateContentLesson(int idLesson, const QString& content);
+
     QList<ELesson> getLessons();
     QList<EQuestion> getQuestions(int idLesson);
     QList<EAnswer> getAnswers(QString idQuestion);

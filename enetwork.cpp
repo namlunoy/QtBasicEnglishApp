@@ -24,8 +24,12 @@ void ENetwork::onGetDataDone(QNetworkReply *reply)
 {
     qDebug() << "Lesson "<<pLesson->getId()<<" has been replied!";
     QString htmlContent(reply->readAll());
-    QList<EQuestion> questions;
+    getContentLesson(htmlContent);
+}
 
+void ENetwork::getAllObjects(const QString &htmlContent)
+{
+    QList<EQuestion> questions;
     QStringList htmlQuests = ETextWork::splitQuestion(htmlContent);
     int index = 0;
     for(QString s : htmlQuests)
@@ -40,6 +44,14 @@ void ENetwork::onGetDataDone(QNetworkReply *reply)
     db.insert(*pLesson);
 
     qDebug() << "Lesson "<<pLesson->getId()<<" has "<<pLesson->getQuestions().count() << " question(s)";
+
+}
+
+void ENetwork::getContentLesson(const QString &htmlContent)
+{
+    QString content = ETextWork::getLessonContent(htmlContent);
+    EDatabase db;
+    db.updateContentLesson(pLesson->getId(),content);
 }
 
 ELesson *ENetwork::getPLesson() const

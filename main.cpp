@@ -25,14 +25,14 @@ int main(int argc, char *argv[])
     QList<ELesson> lessons = db.getLessons();
 
 
-    for (int i = 0; i < lessons.count(); ++i) {
-        qDebug() << "Times: "<<i;
-        ENetwork *network = new ENetwork(&app, &lessons[i]);
-        network->getData(lessons[i].getUrl());
-    }
+//    for (int i = 0; i < lessons.count(); ++i) {
+//        qDebug() << "Times: "<<i;
+//        ENetwork *network = new ENetwork(&app, &lessons[i]);
+//        network->getData(lessons[i].getUrl());
+//    }
 
-//    ENetwork *network = new ENetwork(&app, &lessons[8]);
-//    network->getData(lessons[8].getUrl());
+   ENetwork *network = new ENetwork(&app, &lessons[1]);
+    network->getData(lessons[1].getUrl());
 
 
     return app.exec();
